@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mao Manin - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="hero-content animate__animated animate__fadeIn">
+                <h1 class="hero-title">Mao Manin</h1>
+                <p class="hero-subtitle">ICT Student | UX/UI Design Enthusiast</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/manin-mao" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/maninmao" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="card">
+            <h2 class="section-title">About Me</h2>
+            <p>A sophomore student pursuing a degree in ICT, with a growing passion for UX/UI design. 
+               Currently interested in creating intuitive, user-centered interfaces that improve digital 
+               experiences, exploring design tools and methodologies, and is eager to learn and collaborate 
+               on projects that enhance my understanding of user experience and interface design.</p>
+        </section>
+
+        <section id="education" class="card">
+            <h2 class="section-title">Education</h2>
+            <div>
+                <h3>American University of Phnom Penh</h3>
+                <p>Bachelor of Science in Information Communications Technology</p>
+                <p>Expected Graduation: 2027</p>
+            </div>
+        </section>
+
+        <section id="activities" class="card">
+            <h2 class="section-title">Extracurricular Activities</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Energy Lab</h3>
+                    <p>Youth Ambassador</p>
+                </div>
+                <div class="card">
+                    <h3>MOEYs</h3>
+                    <p>Volunteer Instructor</p>
+                </div>
+                <div class="card">
+                    <h3>Python Cambodia</h3>
+                    <p>Operations Assistant</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="card">
+            <h2 class="section-title">Skills</h2>
+            <div class="grid">
+                <div class="card">
+                    <i class="fas fa-code"></i>
+                    <h3>Technical Skills</h3>
+                    <p>Web Development, UI/UX Design, Python </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-users"></i>
+                    <h3>Soft Skills</h3>
+                    <p>Communication, Leadership, Problem Solving</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Tools & Technologies</h3>
+                    <p>Adobe XD, Figma, VS Code, Git</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="card">
+            <h2 class="section-title">Contact Me</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="contact-info social-links">
+                <a href="mailto:maninmao13@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="tel:023880880">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="https://goo.gl/maps/phnom-penh" target="_blank">
+                    <i class="fas fa-map-marker-alt"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Form Submission
+        const form = document.querySelector('.contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            form.reset();
+        });
+    </script>
+</body>
+</html>
